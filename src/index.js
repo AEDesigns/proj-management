@@ -24,14 +24,21 @@ const store = createStore(
   )
 );
 
+const profileSpecificProps = {
+  userProfile: "users",
+  useFirestoreForProfile: true,
+  enableRedirectHandling: false,
+  resetBeforeLogin: false,
+};
+
+//second config propery added
 const rrfProps = {
   firebase,
   config: fbConfig,
+  //second config added here
+  config: profileSpecificProps,
   dispatch: store.dispatch,
   createFirestoreInstance,
-  userProfile: "users", // where profiles are stored in database
-  presence: "presence", // where list of online users is stored in database
-  sessions: "sessions",
 };
 
 function AuthIsLoaded({ children }) {
@@ -42,11 +49,9 @@ function AuthIsLoaded({ children }) {
 
 ReactDOM.render(
   <Provider store={store}>
-    {" "}
     <ReactReduxFirebaseProvider {...rrfProps}>
-      {" "}
       <AuthIsLoaded>
-        <App />{" "}
+        <App />
       </AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
