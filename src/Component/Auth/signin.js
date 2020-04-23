@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import SignInAct from "../../store/actions/authActions";
 
 class signin extends Component {
   state = {
@@ -12,7 +14,7 @@ class signin extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    console.log(this.props);
   };
   render() {
     return (
@@ -36,4 +38,12 @@ class signin extends Component {
   }
 }
 
-export default signin;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => {
+      dispatch(SignInAct)(creds);
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(signin);
