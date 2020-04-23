@@ -1,6 +1,6 @@
 import firebase from "firebase";
 
-const SignInAct = (credentials) => {
+export const SignInAct = (credentials) => {
   return (dispatch, getState) => {
     firebase
       .auth()
@@ -14,4 +14,13 @@ const SignInAct = (credentials) => {
   };
 };
 
-export default SignInAct;
+export const signOut = () => {
+  return (dispatch, getState) => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({ type: "SIGNOUT_SUCCESS" });
+      });
+  };
+};
